@@ -2,7 +2,8 @@
 //Reference : next-auth.js.org/configuartion/options
 
 import NextAuth from "next-auth";
-import Providers from "next-auth/providers";
+//import SessionProvider from "next-auth/providers";
+import CredentialsProvider from "next-auth/providers/credentials";
 import { verifyPassword } from "../../../lib/auth";
 import { connectToDatabase } from "../../../lib/db";
 
@@ -11,7 +12,8 @@ export default NextAuth({
     jwt: true,
   },
   providers: [
-    Providers.Credentials({
+    //Providers.Credentials({
+    CredentialsProvider({
       async authorize(credentials) {
         const client = await connectToDatabase();
 
