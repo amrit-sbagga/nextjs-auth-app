@@ -27,6 +27,16 @@ async function handler(req, res) {
 
   const db = client.db();
 
+  // check if user with this email already exists
+  const existingUser = await db.collection("users").findOne({
+      email : email
+  });
+
+  if(existingUser){
+    res.status(422).json({message : 'User Already exists!'});
+    return;
+  }
+
   const hashPassword = await hashedPassword(password);
   const result = await db.collection("users").insertOne({
     email: email,
