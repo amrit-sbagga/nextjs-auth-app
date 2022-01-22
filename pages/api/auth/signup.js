@@ -34,6 +34,7 @@ async function handler(req, res) {
 
   if(existingUser){
     res.status(422).json({message : 'User Already exists!'});
+    client.close();
     return;
   }
 
@@ -44,6 +45,7 @@ async function handler(req, res) {
   });
 
   res.status(201).json({ message: "Created user!" });
+  client.close();
 }
 
 export default handler;
